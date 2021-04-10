@@ -26,7 +26,7 @@ class ContactRequest extends FormRequest
     {
         return [
             'name'  => 'required|min:3',
-            'cpf'   => ['required', 'max:11', Rule::unique('contacts', 'email')->ignore($this->contact)],
+            'cpf'   => ['required', 'max:14', Rule::unique('contacts', 'email')->ignore($this->contact)],
             'email' => 'required|email',
         ];
     }
@@ -40,8 +40,8 @@ class ContactRequest extends FormRequest
             'email'    => 'Formato inválido!',
             'required' => ':attribute é um campo obrigatório!',
             'unique'   => 'Já existe um registro para esse :attribute.',
-            'min'      => ':attribute deve conter pelo menos :value caracteres.',
-            'max'      => ':attribute deve conter no máximo :value caracteres.'
+            'min'      => ':attribute deve conter pelo menos :min caracteres.',
+            'max'      => ':attribute deve conter no máximo :max caracteres.'
         ];
     }
 

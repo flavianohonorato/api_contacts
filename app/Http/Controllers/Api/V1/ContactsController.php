@@ -7,6 +7,7 @@ use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 use App\Support\ApiResponse;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -18,11 +19,10 @@ class ContactsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return JsonResponse
      */
-    public function index(): JsonResponse
+    public function index(): LengthAwarePaginator
     {
-        return $this->getAll(Contact::all(), 200);
+        return Contact::query()->paginate(10);
     }
 
     /**
@@ -35,6 +35,18 @@ class ContactsController extends Controller
     {
         try {
             $contact = Contact::create($request->all());
+            $validator = validator()->make($request->all(), $request->rules(), $request->messages());
+
+            if ($validator->fails()) {
+                info('ERROR', [$validator->errors()]);
+                return response()->json([
+                    'success'   =>  false,
+                    'message'   =>  'Ocorreu um erro',
+                    'code'      =>  422,
+                    'errors'    =>  $validator->errors()
+                ]);
+            }
+
             return $this->getOne($contact);
         } catch (ModelNotFoundException | Exception $exception) {
             return response()->json([$exception->getMessage(), $exception->getCode()]);

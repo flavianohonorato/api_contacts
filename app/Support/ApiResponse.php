@@ -34,7 +34,7 @@ trait ApiResponse
      */
     protected function successResponse($data, $code = 200): JsonResponse
     {
-        return self::showMessage('Successfully', true, $code, $data);
+        return self::showMessage('Record added successfully!', true, $code, $data);
     }
 
     /**
@@ -122,7 +122,7 @@ trait ApiResponse
         Validator::validate(request()->all(), $rules);
 
         $page = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 15;
+        $perPage = 1;
 
         if (request()->has('per_page')) {
             $perPage = (int)request()->per_page;
