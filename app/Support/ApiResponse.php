@@ -34,7 +34,7 @@ trait ApiResponse
      */
     protected function successResponse($data, $code = 200): JsonResponse
     {
-        return self::showMessage('Record added successfully!', true, $code, $data);
+        return self::showMessage('Record save successfully!', true, $code, $data);
     }
 
     /**
