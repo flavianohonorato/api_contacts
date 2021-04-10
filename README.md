@@ -34,9 +34,9 @@ POST /api/v1/contacts HTTP/1.1
 Content-Type: application/json
 Host: localhost:8000
 {
-    "name": "jane Doe 3",
+    "name": "jane Doe",
     "email": "jane@doe.com.br",
-    "cpf": "01258638374"
+    "cpf": "000-111.222-33"
 }
 ```
 
@@ -46,7 +46,7 @@ PUT /api/v1/contacts/1 HTTP/1.1
 Content-Type: application/json
 Host: localhost:8000
 {
-    "name": "jane Doe"
+    "name": "Jane Doe"
 }
 ```
 
