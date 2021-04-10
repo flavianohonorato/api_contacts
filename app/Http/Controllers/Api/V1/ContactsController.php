@@ -99,7 +99,7 @@ class ContactsController extends Controller
         try {
             $success = Contact::findOrFail($id)->delete();
             if ($success)
-                return self::showMessage('Successfuly', true, 401);
+                return self::showMessage('Record removed successfully', true);
         } catch (ModelNotFoundException | Exception $exception) {
             return response()->json([$exception->getMessage(), $exception->getCode()]);
         }
